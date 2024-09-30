@@ -1,0 +1,5 @@
+IO_LOC "pa_en" R16;
+IO_LOC "dout" P15;
+IO_LOC "lrclk" P16;
+IO_LOC "sclk" N15;
+IO_LOC "clk27m" H11;
