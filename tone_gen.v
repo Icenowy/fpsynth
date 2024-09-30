@@ -17,12 +17,12 @@ reg [18:0]period_latched;
 reg [1:0]rom_read_stage;
 
 tone_rom tone_rom(
-    .clk(clk48m),
-    .rst(rst),
+	.clk(clk48m),
+	.rst(rst),
 
-    .addr(rom_addr),
+	.addr(rom_addr),
 
-    .data(rom_out)
+	.data(rom_out)
 );
 
 always @(posedge clk48m or posedge rst) begin
