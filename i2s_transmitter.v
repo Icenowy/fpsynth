@@ -1,7 +1,7 @@
 module i2s_transmitter(
 	input clk48m,
 	input rst,
-	input [23:0]signal,
+	input [16:0]signal,
 
 	output mclk,
 	output sclk,
@@ -45,7 +45,7 @@ always @(posedge clk48m or posedge rst) begin
 			if (cur_lrclk == 1) begin
 				/* latch the output signal */
 				/* TODO: only right justified 16bit now */
-				out_signal <= {16'b0, signal[23:8]};
+				out_signal <= {16'b0, signal[15:0]};
 			end
 			cur_lrclk <= ~cur_lrclk;
 		end

@@ -10,7 +10,7 @@ module tangprimer20k(
 wire clk48m;
 wire rst48m;
 
-wire [23:0]signal;
+wire [15:0]signal;
 wire [18:0]period;
 
 wire pll48m_lock;

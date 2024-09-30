@@ -4,7 +4,7 @@ module square_wave(
 
     input [18:0]period,
 
-	output [23:0]value
+	output [15:0]value
 );
 
 reg [17:0] counter;
@@ -28,6 +28,6 @@ always @(posedge clk48m or posedge rst) begin
 	end
 end
 
-assign value = status ? 24'h7fffff : 24'h800000;
+assign value = status ? 16'h7fff : 16'h8000;
 
 endmodule
