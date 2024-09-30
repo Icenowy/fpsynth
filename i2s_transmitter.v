@@ -15,7 +15,7 @@ reg cur_lrclk;
 reg cur_dout;
 
 reg [128:0] counter;
-reg [31:0] out_signal;
+reg [15:0] out_signal;
 
 always @(posedge clk48m or posedge rst) begin
 	if (rst) begin
@@ -35,7 +35,7 @@ always @(posedge clk48m or posedge rst) begin
 			/* sclk = 48m/32 = 1.5m */
 			if (cur_sclk == 1) begin
 				/* Send out the corresponding output */
-				cur_dout <= out_signal[32-counter[8:5]];
+				cur_dout <= out_signal[15-counter[8:5]];
 			end
 			cur_sclk <= ~cur_sclk;
 		end
@@ -44,8 +44,7 @@ always @(posedge clk48m or posedge rst) begin
 			/* lrclk = 48m/1024 = 46875 */
 			if (cur_lrclk == 1) begin
 				/* latch the output signal */
-				/* TODO: only right justified 16bit now */
-				out_signal <= {16'b0, signal[15:0]};
+				out_signal <= signal;
 			end
 			cur_lrclk <= ~cur_lrclk;
 		end
