@@ -2,30 +2,18 @@ module square_wave(
 	input clk48m,
 	input rst,
 
-	input [18:0]period,
+	input [9:0]phase,
 
 	output [15:0]value
 );
 
-reg [17:0] counter;
-
 reg status;
 
 always @(posedge clk48m or posedge rst) begin
-	if (rst) begin
-		counter <= 0;
+	if (rst)
 		status <= 0;
-	end else begin
-		if (period == 0) begin
-			status <= 0;
-			counter <= 0;
-		end else if (counter >= period[18:1]) begin
-			status <= ~status;
-			counter <= 0;
-		end else begin
-			counter <= counter + 1;
-		end
-	end
+	else
+		status <= phase[9];
 end
 
 assign value = status ? 16'h7fff : 16'h8000;

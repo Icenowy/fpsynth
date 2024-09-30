@@ -1,7 +1,7 @@
 module i2s_transmitter(
 	input clk48m,
 	input rst,
-	input [16:0]signal,
+	input [15:0]signal,
 
 	output mclk,
 	output sclk,

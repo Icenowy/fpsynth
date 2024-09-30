@@ -1,7 +1,7 @@
 LIBS = -lm
 GW_SH = gw_sh
 
-VERILOG_SOURCES = i2s_transmitter.v square_wave.v tangprimer20k_top.v tone_gen.v tone_rom_hrhkg_readmemh.v
+VERILOG_SOURCES = i2s_transmitter.v square_wave.v tangprimer20k_top.v tone_gen.v tone_rom_hrhkg_readmemh.v phase_gen.v
 
 impl/pnr/project.fs: $(VERILOG_SOURCES) haruhikage.rom
 	$(GW_SH) tangprimer20k.tcl

@@ -11,7 +11,8 @@ wire clk48m;
 wire rst48m;
 
 wire [15:0]signal;
-wire [18:0]period;
+wire [15:0]phase_divider;
+wire [10:0]phase;
 
 wire pll48m_lock;
 rPLL #(
@@ -48,14 +49,23 @@ tone_gen tone_gen(
 	.clk48m(clk48m),
 	.rst(rst48m),
 
-	.period(period)
+	.phase_divider(phase_divider)
+);
+
+phase_gen phase_gen(
+	.clk48m(clk48m),
+	.rst(rst48m),
+
+	.phase_divider(phase_divider),
+
+	.phase(phase)
 );
 
 square_wave sqwave(
 	.clk48m(clk48m),
 	.rst(rst48m),
 
-	.period(period),
+	.phase(phase),
 
 	.value(signal)
 );

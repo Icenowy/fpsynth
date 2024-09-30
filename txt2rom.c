@@ -54,6 +54,6 @@ int main()
 	while (scanf("%s%lf", note, &beats) == 2) {
 		double freq = note_to_freq(note);
 		printf("%08x\n", (unsigned int) round(CPS * 60 / bpm * beats));
-		printf("%08x\n", (unsigned int) round(CPS / freq));
+		printf("%08x\n", (unsigned int) round(CPS / freq / 64));
 	}
 }
