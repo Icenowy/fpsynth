@@ -44,7 +44,7 @@ always @(posedge clk48m or posedge rst) begin
 			/* lrclk = 48m/1024 = 46875 */
 			if (cur_lrclk == 1) begin
 				/* latch the output signal */
-				out_signal <= signal;
+				out_signal <= {signal[15], signal[15], signal[15:2]};
 			end
 			cur_lrclk <= ~cur_lrclk;
 		end

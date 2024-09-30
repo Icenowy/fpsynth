@@ -7,5 +7,7 @@ add_file phase_gen.v
 add_file square_wave.v
 add_file tone_gen.v
 add_file tone_rom_hrhkg_readmemh.v
+add_file scaler_infer.v
+add_file adsr.v
 set_option -rw_check_on_ram 1
 run all

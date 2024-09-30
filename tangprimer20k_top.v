@@ -10,9 +10,13 @@ module tangprimer20k(
 wire clk48m;
 wire rst48m;
 
+wire [15:0]signal_wave;
 wire [15:0]signal;
+wire [15:0]scale;
 wire [15:0]phase_divider;
-wire [10:0]phase;
+wire trigger;
+wire dehold;
+wire [9:0]phase;
 
 wire pll48m_lock;
 rPLL #(
@@ -49,7 +53,9 @@ tone_gen tone_gen(
 	.clk48m(clk48m),
 	.rst(rst48m),
 
-	.phase_divider(phase_divider)
+	.phase_divider(phase_divider),
+	.trigger(trigger),
+	.dehold(dehold)
 );
 
 phase_gen phase_gen(
@@ -61,13 +67,33 @@ phase_gen phase_gen(
 	.phase(phase)
 );
 
-square_wave sqwave(
+square_wave wave(
 	.clk48m(clk48m),
 	.rst(rst48m),
 
 	.phase(phase),
 
-	.value(signal)
+	.value(signal_wave)
+);
+
+adsr adsr(
+	.clk48m(clk48m),
+	.rst(rst48m),
+
+	.trigger(trigger),
+	.dehold(dehold),
+
+	.scale(scale)
+);
+
+scaler scaler(
+	.clk48m(clk48m),
+	.rst(rst48m),
+
+	.signal(signal_wave),
+	.scale(scale),
+
+	.result(signal)
 );
 
 i2s_transmitter i2s(
