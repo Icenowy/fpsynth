@@ -18,7 +18,7 @@ reg [9:0]current_phase;
 wire [4:0]next_subclk_accumulator = subclk_accumulator + subdivider_latched;
 
 always @(posedge clk48m or posedge rst) begin
-	if (rst | (phase_divider == 0)) begin
+	if (rst) begin
 		current_phase <= 0;
 		divider_latched <= 0;
 		subdivider_latched <= 0;
@@ -26,7 +26,14 @@ always @(posedge clk48m or posedge rst) begin
 		subclk_accumulator <= 0;
 		subclk_accumulated <= 0;
 	end else begin
-		if (counter >= divider_latched) begin
+		if (phase_divider == 0) begin
+			current_phase <= 0;
+			divider_latched <= 0;
+			subdivider_latched <= 0;
+			counter <= 0;
+			subclk_accumulator <= 0;
+			subclk_accumulated <= 0;
+		end else if (counter >= divider_latched) begin
 			if (~subclk_accumulated) begin
 				divider_latched <= phase_divider[15:4];
 				subdivider_latched <= phase_divider[3:0];
